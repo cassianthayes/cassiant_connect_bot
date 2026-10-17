@@ -1,0 +1,4 @@
+BOT_TOKEN=123456:ABC...
+TELEGRAM_WEBHOOK_SECRET=some-long-random-string
+REMNAWAVE_TOKEN=remnawave-api-token
+REMNAWAVE_WEBHOOK_SECRET=same-as-WEBHOOK_SECRET_HEADER-in-remnawave
