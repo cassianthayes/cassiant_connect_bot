@@ -17,7 +17,7 @@ src/
 
 ## Features
 
-- Reply-keyboard menu: **Оплатить звёздами**, **Промокод**, **Как подключиться**. The last one shows subscription status with a **Подключиться** inline button that opens the subscription page, which has its own setup guide.
+- Reply-keyboard menu: **Оплатить звёздами**, **Промокод**, **Как подключиться**. The last one shows subscription status with two inline buttons: **Подключиться** opens the subscription page, which has its own setup guide, and **Маршрутизация для Incy** sends the [roscomvpn](https://github.com/hydraponique/roscomvpn-routing) whitelist `incy://routing/onadd/…` link as tap-to-copy text with a short import guide (Telegram buttons can't hold `incy://` URLs).
 - All dates are shown in Moscow time with an «МСК» suffix.
 - Stars plans are set in `PLANS` in `wrangler.jsonc` as days → price in Stars.
 - Promocodes look like `1234-5678` and are single-use. Users can type them (`12345678` and `1234 5678` also work) or open `https://t.me/<bot>?start=1234-5678`.

@@ -4,7 +4,7 @@ import type { Env } from "./env";
 import { CODE_RE, createCodes, normalizeCode, redeemCode, releaseCode } from "./promo";
 import { isActive, Remnawave, type RemnawaveUser } from "./remnawave";
 import { createLogger, describe, telegramOptions, who } from "./telegram";
-import { buttons, connectMenu, esc, keyboard, mainMenu, period, texts } from "./texts";
+import { buttons, connectMenu, esc, INCY_ROUTING, keyboard, mainMenu, period, texts } from "./texts";
 
 // D1 allows at most 100 bound parameters per query; each code row binds 2
 const MAX_CODES = 30;
@@ -130,6 +130,13 @@ export function createBot(env: Env, ctx: ExecutionContext) {
     const u = await user(c);
     event(c, "📲 Как подключиться");
     await reply(c, texts.connect(isActive(u) ? new Date(u.expireAt) : null), connectMenu(u.subscriptionUrl));
+  });
+
+  bot.on("callback_query", async (c) => {
+    await c.answerCallbackQuery();
+    if (c.callbackQuery?.data !== INCY_ROUTING) return;
+    event(c, "🧭 Маршрутизация для Incy");
+    await c.reply(texts.incyRouting, { parse_mode: "HTML" });
   });
 
   bot.hears(buttons.back, (c) => reply(c, texts.menu));

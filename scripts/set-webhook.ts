@@ -12,7 +12,7 @@ const api = new Api(BOT_TOKEN);
 await api.setWebhook({
   url: `${baseUrl.replace(/\/+$/, "")}/telegram`,
   secret_token: TELEGRAM_WEBHOOK_SECRET,
-  allowed_updates: ["message", "pre_checkout_query"],
+  allowed_updates: ["message", "callback_query", "pre_checkout_query"],
 });
 await api.setMyCommands({ commands: [{ command: "start", description: "Меню" }] });
 
