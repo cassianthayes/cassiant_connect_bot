@@ -4,13 +4,12 @@ import type { Env } from "./env";
 import { CODE_RE, createCodes, normalizeCode, redeemCode, releaseCode } from "./promo";
 import { isActive, Remnawave, type RemnawaveUser } from "./remnawave";
 import { createLogger, describe, telegramOptions, who } from "./telegram";
-import { buttons, connectMenu, esc, keyboard, mainMenu, period, SUB_LINK, texts } from "./texts";
+import { buttons, connectMenu, esc, keyboard, mainMenu, period, texts } from "./texts";
 
 // D1 allows at most 100 bound parameters per query; each code row binds 2
 const MAX_CODES = 30;
 
-/** origin: the worker's public origin, for links to its own pages */
-export function createBot(env: Env, ctx: ExecutionContext, origin: string) {
+export function createBot(env: Env, ctx: ExecutionContext) {
   const bot = new Bot(env.BOT_TOKEN, telegramOptions(env));
   const db = getDb(env.DB);
   const rw = new Remnawave(env);
@@ -130,15 +129,7 @@ export function createBot(env: Env, ctx: ExecutionContext, origin: string) {
   bot.hears(buttons.connect, async (c) => {
     const u = await user(c);
     event(c, "📲 Как подключиться");
-    await reply(c, texts.connect(isActive(u) ? new Date(u.expireAt) : null), connectMenu(u.subscriptionUrl, `${origin}/routing`));
-  });
-
-  bot.on("callback_query", async (c) => {
-    await c.answerCallbackQuery();
-    if (c.callbackQuery?.data !== SUB_LINK) return;
-    const u = await user(c);
-    event(c, "🔗 Ссылка для продвинутых");
-    await c.reply(texts.subLink(u.subscriptionUrl), { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
+    await reply(c, texts.connect(isActive(u) ? new Date(u.expireAt) : null), connectMenu(u.subscriptionUrl));
   });
 
   bot.hears(buttons.back, (c) => reply(c, texts.menu));

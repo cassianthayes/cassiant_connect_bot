@@ -35,8 +35,6 @@ export const buttons = {
   connect: "как подключиться",
   back: "назад",
   easyConnect: "подключиться",
-  advanced: "для продвинутых",
-  routing: "обход российских приложений",
   plan: (days: number, stars: number) =>
     `${period(days)} — ${plural(stars, ["звезда", "звезды", "звёзд"])}`,
 };
@@ -52,32 +50,12 @@ export const mainMenu = keyboard([
   [buttons.connect],
 ]);
 
-export const SUB_LINK = "sub_link";
-
-/** Happ whitelist routing: the file holds a happ:// deeplink */
-export const HAPP_ROUTING_URL =
-  "https://raw.githubusercontent.com/hydraponique/roscomvpn-routing/refs/heads/main/HAPP/WHITELIST.DEEPLINK";
-
-/** the subscription page has its own per-device setup guide; routingUrl is the worker's GET /routing */
-export const connectMenu = (url: string, routingUrl: string) => ({
+/** the subscription page has its own per-device setup guide */
+export const connectMenu = (url: string) => ({
   inline_keyboard: [
     [{ text: buttons.easyConnect, url }],
-    [{ text: buttons.advanced, callback_data: SUB_LINK }],
-    [{ text: buttons.routing, url: routingUrl }],
   ],
 });
-
-/** Telegram buttons only take http(s)/tg URLs, so this page forwards to the happ:// deeplink */
-export const routingPage = (deeplink: string) => {
-  const href = deeplink.replace(
-    /[&<>"]/g,
-    (c) => `&${{ "&": "amp", "<": "lt", ">": "gt", '"': "quot" }[c]};`,
-  );
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Маршрутизация для Happ</title><meta http-equiv="refresh" content="0;url=${href}">
-<style>body{font:18px system-ui,sans-serif;margin:40px 16px;text-align:center}a{display:inline-block;padding:12px 20px;border-radius:10px;background:#2a7de1;color:#fff;text-decoration:none}</style>
-</head><body><p>открываем Happ…</p><p><a href="${href}">открыть в Happ</a></p><p>не открывается? установи Happ и нажми кнопку ещё раз.</p></body></html>`;
-};
 
 export const texts = {
   welcome: (name: string) =>
@@ -108,9 +86,6 @@ export const texts = {
       ? `подписка до <b>${date(activeUntil)}</b>.`
       : "подписки нет. оплати звёздами или введи промокод.") +
     `\n\nжми «${buttons.easyConnect}», там инструкция.`,
-  subLink: (url: string) =>
-    // no <code> inside: a code entity nested in a spoiler is shown unhidden
-    `твоя ссылка, нажми, чтобы показать:\n<tg-spoiler>${esc(url)}</tg-spoiler>`,
 
   expiresSoon: (hoursLeft: number, until: Date) =>
     `подписка закончится через <b>${hours(hoursLeft)}</b>, ${date(until)}. продли, чтобы не остаться без vpn.`,
