@@ -35,7 +35,6 @@ export const buttons = {
   connect: "как подключиться",
   back: "назад",
   easyConnect: "подключиться",
-  routing: "российские приложения",
   plan: (days: number, stars: number) =>
     `${period(days)} — ${plural(stars, ["звезда", "звезды", "звёзд"])}`,
 };
@@ -51,17 +50,9 @@ export const mainMenu = keyboard([
   [buttons.connect],
 ]);
 
-export const INCY_ROUTING = "incy_routing";
-
-/** Incy's in-app name for the per-app proxy setting (Android only) */
-const INCY_PER_APP = "Прокси по приложениям";
-
 /** the subscription page has its own per-device setup guide */
 export const connectMenu = (url: string) => ({
-  inline_keyboard: [
-    [{ text: buttons.easyConnect, url }],
-    [{ text: buttons.routing, callback_data: INCY_ROUTING }],
-  ],
+  inline_keyboard: [[{ text: buttons.easyConnect, url }]],
 });
 
 export const texts = {
@@ -89,16 +80,9 @@ export const texts = {
     `готово, +${period(days)}. подписка до <b>${date(until)}</b>.\n\nжми «${buttons.connect}».`,
 
   connect: (activeUntil: Date | null) =>
-    (activeUntil
+    activeUntil
       ? `подписка до <b>${date(activeUntil)}</b>.`
-      : "подписки нет. оплати звёздами или введи промокод.") +
-    `\n\nжми «${buttons.easyConnect}», там инструкция.`,
-  incyRouting:
-    "если банки, госуслуги или другие российские приложения не работают с vpn, пусти их в обход (только android):\n\n" +
-    `1. открой incy → настройки → «${INCY_PER_APP}».\n` +
-    "2. включи «Включить прокси по приложениям» и выбери режим «Обход».\n" +
-    "3. отметь приложения, которые не работают с vpn.\n" +
-    "4. переподключись.",
+      : "подписки нет. оплати звёздами или введи промокод.",
 
   expiresSoon: (hoursLeft: number, until: Date) =>
     `подписка закончится через <b>${hours(hoursLeft)}</b>, ${date(until)}. продли, чтобы не остаться без vpn.`,

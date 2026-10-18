@@ -17,7 +17,7 @@ src/
 
 ## Features
 
-- Reply-keyboard menu: **Оплатить звёздами**, **Промокод**, **Как подключиться**. The last one shows subscription status with two inline buttons: **Подключиться** opens the subscription page, which has its own setup guide, and **Российские приложения** sends a short guide to Incy's per-app proxy in bypass mode (Android only), so apps that break over VPN go direct.
+- Reply-keyboard menu: **Оплатить звёздами**, **Промокод**, **Как подключиться**. The last one shows subscription status with a **Подключиться** inline button that opens the subscription page, which has its own setup guide.
 - All dates are shown in Moscow time with an «МСК» suffix.
 - Stars plans are set in `PLANS` in `wrangler.jsonc` as days → price in Stars.
 - Promocodes look like `1234-5678` and are single-use. Users can type them (`12345678` and `1234 5678` also work) or open `https://t.me/<bot>?start=1234-5678`.
