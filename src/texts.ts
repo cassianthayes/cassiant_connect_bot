@@ -30,13 +30,13 @@ const date = (d: Date) =>
   }) + " МСК";
 
 export const buttons = {
-  pay: "Оплатить звёздами",
-  promo: "Промокод",
-  connect: "Как подключиться",
-  back: "Назад",
-  easyConnect: "Подключиться",
-  advanced: "Для продвинутых",
-  routing: "Маршрутизация для Happ",
+  pay: "оплатить звёздами",
+  promo: "промокод",
+  connect: "как подключиться",
+  back: "назад",
+  easyConnect: "подключиться",
+  advanced: "для продвинутых",
+  routing: "обход российских приложений",
   plan: (days: number, stars: number) =>
     `${period(days)} — ${plural(stars, ["звезда", "звезды", "звёзд"])}`,
 };
@@ -54,9 +54,9 @@ export const mainMenu = keyboard([
 
 export const SUB_LINK = "sub_link";
 
-/** recommended Happ routing: the file holds a happ:// deeplink */
+/** Happ whitelist routing: the file holds a happ:// deeplink */
 export const HAPP_ROUTING_URL =
-  "https://raw.githubusercontent.com/hydraponique/roscomvpn-routing/refs/heads/main/HAPP/DEFAULT.DEEPLINK";
+  "https://raw.githubusercontent.com/hydraponique/roscomvpn-routing/refs/heads/main/HAPP/WHITELIST.DEEPLINK";
 
 /** the subscription page has its own per-device setup guide; routingUrl is the worker's GET /routing */
 export const connectMenu = (url: string, routingUrl: string) => ({
@@ -69,7 +69,10 @@ export const connectMenu = (url: string, routingUrl: string) => ({
 
 /** Telegram buttons only take http(s)/tg URLs, so this page forwards to the happ:// deeplink */
 export const routingPage = (deeplink: string) => {
-  const href = deeplink.replace(/[&<>"]/g, (c) => `&${{ "&": "amp", "<": "lt", ">": "gt", '"': "quot" }[c]};`);
+  const href = deeplink.replace(
+    /[&<>"]/g,
+    (c) => `&${{ "&": "amp", "<": "lt", ">": "gt", '"': "quot" }[c]};`,
+  );
   return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Маршрутизация для Happ</title><meta http-equiv="refresh" content="0;url=${href}">
 <style>body{font:18px system-ui,sans-serif;margin:40px 16px;text-align:center}a{display:inline-block;padding:12px 20px;border-radius:10px;background:#2a7de1;color:#fff;text-decoration:none}</style>
