@@ -5,7 +5,7 @@ Remnawave is the only source of user state. D1 stores just promocodes, failed pr
 
 ```
 src/
-  index.ts      routes: POST /telegram, POST /remnawave
+  index.ts      routes: POST /telegram, POST /remnawave, GET /routing
   bot.ts        Telegram handlers
   remnawave.ts  Remnawave API client and webhook handler
   promo.ts      promocodes: generation, redemption, rate limit
@@ -17,7 +17,7 @@ src/
 
 ## Features
 
-- Reply-keyboard menu: **Оплатить звёздами**, **Промокод**, **Как подключиться**. The last one shows subscription status with two inline buttons: **Подключиться** opens the subscription page, which has its own setup guide, and **Для продвинутых** sends the raw link hidden under a spoiler.
+- Reply-keyboard menu: **Оплатить звёздами**, **Промокод**, **Как подключиться**. The last one shows subscription status with three inline buttons: **Подключиться** opens the subscription page, which has its own setup guide, **Для продвинутых** sends the raw link hidden under a spoiler, and **Маршрутизация для INCY** opens `GET /routing` on the worker, a tiny page that forwards to the recommended [roscomvpn-routing](https://github.com/hydraponique/roscomvpn-routing) `incy://` deeplink (fetched from GitHub, edge-cached for an hour), since Telegram buttons can't hold `incy://` URLs.
 - All dates are shown in Moscow time with an «МСК» suffix.
 - Stars plans are set in `PLANS` in `wrangler.jsonc` as days → price in Stars.
 - Promocodes look like `1234-5678` and are single-use. Users can type them (`12345678` and `1234 5678` also work) or open `https://t.me/<bot>?start=1234-5678`.

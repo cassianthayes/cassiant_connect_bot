@@ -9,7 +9,8 @@ import { buttons, connectMenu, esc, keyboard, mainMenu, period, SUB_LINK, texts 
 // D1 allows at most 100 bound parameters per query; each code row binds 2
 const MAX_CODES = 30;
 
-export function createBot(env: Env, ctx: ExecutionContext) {
+/** origin: the worker's public origin, for links to its own pages */
+export function createBot(env: Env, ctx: ExecutionContext, origin: string) {
   const bot = new Bot(env.BOT_TOKEN, telegramOptions(env));
   const db = getDb(env.DB);
   const rw = new Remnawave(env);
@@ -129,7 +130,7 @@ export function createBot(env: Env, ctx: ExecutionContext) {
   bot.hears(buttons.connect, async (c) => {
     const u = await user(c);
     event(c, "📲 Как подключиться");
-    await reply(c, texts.connect(isActive(u) ? new Date(u.expireAt) : null), connectMenu(u.subscriptionUrl));
+    await reply(c, texts.connect(isActive(u) ? new Date(u.expireAt) : null), connectMenu(u.subscriptionUrl, `${origin}/routing`));
   });
 
   bot.on("callback_query", async (c) => {
