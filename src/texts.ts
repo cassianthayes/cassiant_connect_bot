@@ -35,7 +35,7 @@ export const buttons = {
   connect: "как подключиться",
   back: "назад",
   easyConnect: "подключиться",
-  routing: "маршрутизация для incy",
+  routing: "российские приложения в incy",
   plan: (days: number, stars: number) =>
     `${period(days)} — ${plural(stars, ["звезда", "звезды", "звёзд"])}`,
 };
@@ -53,9 +53,8 @@ export const mainMenu = keyboard([
 
 export const INCY_ROUTING = "incy_routing";
 
-/** roscomvpn whitelist routing profile; too long for a copy_text button and Telegram URL buttons reject incy://, so it's sent as text */
-const INCY_ROUTING_LINK =
-  "incy://routing/onadd/eyJOYW1lIjoiUm9zY29tVlBOIFdoaXRlbGlzdCIsIkdsb2JhbFByb3h5IjoidHJ1ZSIsIlVzZUNodW5rRmlsZXMiOiJ0cnVlIiwiUmVtb3RlRG5zIjoiOC44LjguOCIsIkRvbWVzdGljRG5zIjoiNzcuODguOC44IiwiUmVtb3RlRE5TVHlwZSI6IkRvSCIsIlJlbW90ZUROU0RvbWFpbiI6Imh0dHBzOi8vOC44LjguOC9kbnMtcXVlcnkiLCJSZW1vdGVETlNJUCI6IjguOC44LjgiLCJEb21lc3RpY0ROU1R5cGUiOiJEb0giLCJEb21lc3RpY0ROU0RvbWFpbiI6Imh0dHBzOi8vNzcuODguOC44L2Rucy1xdWVyeSIsIkRvbWVzdGljRE5TSVAiOiI3Ny44OC44LjgiLCJHZW9pcHVybCI6Imh0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9naC9oeWRyYXBvbmlxdWUvcm9zY29tdnBuLWdlb2lwL3JlbGVhc2UvZ2VvaXAuZGF0IiwiR2Vvc2l0ZXVybCI6Imh0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9naC9oeWRyYXBvbmlxdWUvcm9zY29tdnBuLWdlb3NpdGUvcmVsZWFzZS9nZW9zaXRlLmRhdCIsIkxhc3RVcGRhdGVkIjoiMTc5MjMxMDM2MiIsIkRuc0hvc3RzIjp7ImxrZmwyLm5hbG9nLnJ1IjoiMjEzLjI0LjY0LjE3NSIsImxrbnBkLm5hbG9nLnJ1IjoiMjEzLjI0LjY0LjE4MSJ9LCJSb3V0ZU9yZGVyIjoiYmxvY2stcHJveHktZGlyZWN0IiwiRGlyZWN0U2l0ZXMiOlsiZ2Vvc2l0ZTpwcml2YXRlIiwiZ2Vvc2l0ZTp3aGl0ZWxpc3QiXSwiRGlyZWN0SXAiOlsiZ2VvaXA6cHJpdmF0ZSIsImdlb2lwOndoaXRlbGlzdCJdLCJQcm94eVNpdGVzIjpbXSwiUHJveHlJcCI6W10sIkJsb2NrU2l0ZXMiOlsiZ2Vvc2l0ZTp3aW4tc3B5IiwiZ2Vvc2l0ZTp0b3JyZW50IiwiZ2Vvc2l0ZTpjYXRlZ29yeS1hZHMiXSwiQmxvY2tJcCI6W10sIkRvbWFpblN0cmF0ZWd5IjoiSVBJZk5vbk1hdGNoIiwiRmFrZUROUyI6ImZhbHNlIn0K";
+/** Incy's in-app name for the per-app proxy setting (Android only) */
+const INCY_PER_APP = "Per-App Proxy";
 
 /** the subscription page has its own per-device setup guide */
 export const connectMenu = (url: string) => ({
@@ -95,12 +94,11 @@ export const texts = {
       : "подписки нет. оплати звёздами или введи промокод.") +
     `\n\nжми «${buttons.easyConnect}», там инструкция.`,
   incyRouting:
-    "российские сайты и приложения пойдут напрямую, остальное через vpn.\n\n" +
-    "1. нажми на ссылку ниже, она скопируется.\n" +
-    "2. открой incy → настройки → маршрутизация.\n" +
-    "3. нажми «+» и выбери импорт из буфера обмена.\n" +
-    "4. выбери профиль «RoscomVPN Whitelist».\n\n" +
-    `<code>${INCY_ROUTING_LINK}</code>`,
+    "если банки, госуслуги или другие российские приложения не работают с vpn, пусти их в обход (только android):\n\n" +
+    `1. открой incy → настройки → «${INCY_PER_APP}».\n` +
+    "2. включи его и выбери режим «обход».\n" +
+    "3. отметь приложения, которые не работают с vpn.\n" +
+    "4. переподключись.",
 
   expiresSoon: (hoursLeft: number, until: Date) =>
     `подписка закончится через <b>${hours(hoursLeft)}</b>, ${date(until)}. продли, чтобы не остаться без vpn.`,
