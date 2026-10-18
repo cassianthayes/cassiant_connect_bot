@@ -36,7 +36,7 @@ export const buttons = {
   back: "Назад",
   easyConnect: "Подключиться",
   advanced: "Для продвинутых",
-  routing: "Маршрутизация для INCY",
+  routing: "Маршрутизация для Happ",
   plan: (days: number, stars: number) =>
     `${period(days)} — ${plural(stars, ["звезда", "звезды", "звёзд"])}`,
 };
@@ -54,9 +54,9 @@ export const mainMenu = keyboard([
 
 export const SUB_LINK = "sub_link";
 
-/** recommended INCY routing: the file holds an incy:// deeplink */
-export const INCY_ROUTING_URL =
-  "https://raw.githubusercontent.com/hydraponique/roscomvpn-routing/refs/heads/main/INCY/DEFAULT.DEEPLINK";
+/** recommended Happ routing: the file holds a happ:// deeplink */
+export const HAPP_ROUTING_URL =
+  "https://raw.githubusercontent.com/hydraponique/roscomvpn-routing/refs/heads/main/HAPP/DEFAULT.DEEPLINK";
 
 /** the subscription page has its own per-device setup guide; routingUrl is the worker's GET /routing */
 export const connectMenu = (url: string, routingUrl: string) => ({
@@ -67,13 +67,13 @@ export const connectMenu = (url: string, routingUrl: string) => ({
   ],
 });
 
-/** Telegram buttons only take http(s)/tg URLs, so this page forwards to the incy:// deeplink */
+/** Telegram buttons only take http(s)/tg URLs, so this page forwards to the happ:// deeplink */
 export const routingPage = (deeplink: string) => {
   const href = deeplink.replace(/[&<>"]/g, (c) => `&${{ "&": "amp", "<": "lt", ">": "gt", '"': "quot" }[c]};`);
   return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Маршрутизация для INCY</title><meta http-equiv="refresh" content="0;url=${href}">
+<title>Маршрутизация для Happ</title><meta http-equiv="refresh" content="0;url=${href}">
 <style>body{font:18px system-ui,sans-serif;margin:40px 16px;text-align:center}a{display:inline-block;padding:12px 20px;border-radius:10px;background:#2a7de1;color:#fff;text-decoration:none}</style>
-</head><body><p>открываем INCY…</p><p><a href="${href}">открыть в INCY</a></p><p>не открывается? установи INCY и нажми кнопку ещё раз.</p></body></html>`;
+</head><body><p>открываем Happ…</p><p><a href="${href}">открыть в Happ</a></p><p>не открывается? установи Happ и нажми кнопку ещё раз.</p></body></html>`;
 };
 
 export const texts = {
