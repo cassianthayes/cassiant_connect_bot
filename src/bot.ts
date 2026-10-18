@@ -135,7 +135,7 @@ export function createBot(env: Env, ctx: ExecutionContext) {
   bot.on("callback_query", async (c) => {
     await c.answerCallbackQuery();
     if (c.callbackQuery?.data !== INCY_ROUTING) return;
-    event(c, "🧭 Российские приложения в Incy");
+    event(c, "🧭 Российские приложения");
     await c.reply(texts.incyRouting, { parse_mode: "HTML" });
   });
 

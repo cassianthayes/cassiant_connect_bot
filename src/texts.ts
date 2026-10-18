@@ -35,7 +35,7 @@ export const buttons = {
   connect: "как подключиться",
   back: "назад",
   easyConnect: "подключиться",
-  routing: "российские приложения в incy",
+  routing: "российские приложения",
   plan: (days: number, stars: number) =>
     `${period(days)} — ${plural(stars, ["звезда", "звезды", "звёзд"])}`,
 };
@@ -54,7 +54,7 @@ export const mainMenu = keyboard([
 export const INCY_ROUTING = "incy_routing";
 
 /** Incy's in-app name for the per-app proxy setting (Android only) */
-const INCY_PER_APP = "Per-App Proxy";
+const INCY_PER_APP = "Прокси по приложениям";
 
 /** the subscription page has its own per-device setup guide */
 export const connectMenu = (url: string) => ({
@@ -96,7 +96,7 @@ export const texts = {
   incyRouting:
     "если банки, госуслуги или другие российские приложения не работают с vpn, пусти их в обход (только android):\n\n" +
     `1. открой incy → настройки → «${INCY_PER_APP}».\n` +
-    "2. включи его и выбери режим «обход».\n" +
+    "2. включи «Включить прокси по приложениям» и выбери режим «Обход».\n" +
     "3. отметь приложения, которые не работают с vpn.\n" +
     "4. переподключись.",
 
