@@ -52,14 +52,12 @@ export const mainMenu = keyboard([
 
 /** the subscription page has its own per-device setup guide */
 export const connectMenu = (url: string) => ({
-  inline_keyboard: [
-    [{ text: buttons.easyConnect, url }],
-  ],
+  inline_keyboard: [[{ text: buttons.easyConnect, url }]],
 });
 
 export const texts = {
   welcome: (name: string) =>
-    `привет, <b>${esc(name)}</b>. оплати звёздами или введи промокод.`,
+    `привет, <b>${esc(name)}</b>. оплати звёздами или введи промокод.\nограничений по количеству устрйоств - нет. страна - германия, потом будет больше.`,
   menu: "меню:",
   unknown: "не понял. используй кнопки.",
   error: "что-то сломалось, попробуй позже.",
