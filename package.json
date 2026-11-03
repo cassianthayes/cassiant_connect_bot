@@ -10,7 +10,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate:local": "wrangler d1 migrations apply cassiant-connect-bot --local",
     "db:migrate": "wrangler d1 migrations apply cassiant-connect-bot --remote",
-    "webhook": "bun --env-file=.dev.vars scripts/set-webhook.ts"
+    "webhook": "bun --env-file=.dev.vars scripts/set-webhook.ts",
+    "broadcast": "bun --env-file=.dev.vars scripts/broadcast.ts"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.4",

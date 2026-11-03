@@ -84,6 +84,21 @@ Telegram allows about 20 messages per minute in a group. Under heavier traffic, 
 The bot verifies `X-Remnawave-Signature`, an HMAC-SHA256 of the raw body. It sends reminders for `user.expiration` events with a negative offset and for `user.expired`, and writes every event to the log group.
 To change when reminders go out, edit `EXPIRATION_NOTIFICATIONS`. The bot needs no changes, because the reminder text uses whatever offset arrives.
 
+## Local broadcast
+
+Save your message in a UTF-8 text file (plain text, up to 4096 characters), then run from the project root:
+
+```sh
+bun run broadcast message.txt          # preview and count recipients; sends nothing
+bun run broadcast message.txt --send   # actually deliver
+```
+
+Set `REMNAWAVE_TOKEN` and `BOT_TOKEN` in `.dev.vars`. `REMNAWAVE_URL` and `LOG_CHAT_ID` default to `wrangler.jsonc`; `.dev.vars` can override them. `TELEGRAM_API_ROOT` is also supported.
+
+The script pages through all Remnawave users and deduplicates the bot's `tg_<telegram id>` accounts, including disabled and expired accounts. It aborts before sending if a stored Telegram ID conflicts with the username. Telegram cannot deliver to users who blocked the bot or never started it; these failures are logged and the script continues, exiting with a nonzero status if any delivery failed.
+
+Every delivery outcome is posted to the log group. Sending is paced at roughly 19 users/minute to respect the group's logging limit; Telegram 429 responses are retried up to five times. A log failure stops the broadcast. Keep the terminal running until completion. There is no resume/deduplication across runs: rerunning with `--send` sends the message again, and a timed-out request may already have delivered.
+
 ## Development
 
 ```sh
